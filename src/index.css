@@ -22,6 +22,14 @@ body {
   border-radius: 50%;
 }
 
+.playerOne .hole {
+  background: tomato;
+}
+
+.playerTwo .hole {
+  background: green;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
