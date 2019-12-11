@@ -44,6 +44,7 @@ class App extends React.Component {
         !slotsInColumn[i].classList.contains("playerTwo")
       ) {
         slotsInColumn[i].classList.add(this.state.currentPlayer);
+
         const linearVictoryCheckResult = linearVictoryCheck(
           slotsInColumn,
           i,
@@ -54,17 +55,37 @@ class App extends React.Component {
           this.state.currentPlayer
         );
 
+        const columns = document.querySelectorAll(".column");
+
+        if (linearVictoryCheckResult) {
+          alert(`${linearVictoryCheckResult.winner} wins`);
+          this.removeColumnEventListeners(columns);
+        }
+
+        if (diagonalVictoryCheckResult) {
+          alert(`${diagonalVictoryCheckResult.winner} wins`);
+          this.removeColumnEventListeners(columns);
+        }
+
         break;
       }
     }
   };
 
+  eventListenerFunctions = e => {
+    this.addClassToSlot(e);
+    this.toggleCurrentPlayer();
+  };
+
   addColumnEventListeners = arrayOfColumns => {
     arrayOfColumns.forEach(column =>
-      column.addEventListener("click", e => {
-        this.addClassToSlot(e);
-        this.toggleCurrentPlayer();
-      })
+      column.addEventListener("click", this.eventListenerFunctions)
+    );
+  };
+
+  removeColumnEventListeners = arrayOfColumns => {
+    arrayOfColumns.forEach(column =>
+      column.removeEventListener("click", this.eventListenerFunctions)
     );
   };
 
