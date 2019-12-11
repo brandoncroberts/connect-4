@@ -20,8 +20,8 @@ class App extends React.Component {
         playerTwo: "Player 2"
       },
       scores: {
-        playerOne: "0",
-        playerTwo: "0"
+        playerOne: 0,
+        playerTwo: 0
       },
       currentPlayer: "playerOne"
     };
@@ -60,11 +60,13 @@ class App extends React.Component {
         if (linearVictoryCheckResult) {
           alert(`${linearVictoryCheckResult.winner} wins`);
           this.removeColumnEventListeners(columns);
+          this.incrementWinnerScore(linearVictoryCheckResult.winner);
         }
 
         if (diagonalVictoryCheckResult) {
           alert(`${diagonalVictoryCheckResult.winner} wins`);
           this.removeColumnEventListeners(columns);
+          this.incrementWinnerScore(diagonalVictoryCheckResult.winner);
         }
 
         break;
@@ -87,6 +89,15 @@ class App extends React.Component {
     arrayOfColumns.forEach(column =>
       column.removeEventListener("click", this.eventListenerFunctions)
     );
+  };
+
+  incrementWinnerScore = winner => {
+    this.setState({
+      scores: {
+        ...this.state.scores,
+        [winner]: this.state.scores[winner] + 1
+      }
+    });
   };
 
   newGame = () => {
