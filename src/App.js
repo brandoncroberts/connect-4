@@ -23,15 +23,16 @@ class App extends React.Component {
         playerTwo: 0
       },
       currentPlayer: "playerOne",
+      startingPlayer: "",
       lastMove: []
     };
   }
 
-  toggleCurrentPlayer = callbackFunction => {
+  toggleCurrentPlayer = () => {
     if (this.state.currentPlayer === "playerOne") {
-      this.setState({ currentPlayer: "playerTwo" }, callbackFunction);
+      this.setState({ currentPlayer: "playerTwo" });
     } else {
-      this.setState({ currentPlayer: "playerOne" }, callbackFunction);
+      this.setState({ currentPlayer: "playerOne" });
     }
   };
 
@@ -120,10 +121,19 @@ class App extends React.Component {
     }
   };
 
+  toggleStartingPlayer = () => {
+    const nextStartingPlayer =
+      this.state.startingPlayer === "playerOne" ? "playerTwo" : "playerOne";
+
+    this.setState({ startingPlayer: nextStartingPlayer });
+    this.setState({ currentPlayer: nextStartingPlayer });
+  };
+
   newGame = () => {
     const columns = document.querySelectorAll(".column");
     this.removeClassesFromSlots();
     this.addColumnEventListeners(columns);
+    this.toggleStartingPlayer();
   };
 
   render() {
