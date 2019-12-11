@@ -23,7 +23,7 @@ class App extends React.Component {
         playerTwo: 0
       },
       currentPlayer: "playerOne",
-      lastMove: ""
+      lastMove: []
     };
   }
 
@@ -44,7 +44,12 @@ class App extends React.Component {
         !slotsInColumn[i].classList.contains("playerTwo")
       ) {
         slotsInColumn[i].classList.add(this.state.currentPlayer);
-        this.setState({ lastMove: slotsInColumn[i] });
+        this.setState({
+          lastMove: [
+            ...this.state.lastMove,
+            { slot: slotsInColumn[i], player: this.state.currentPlayer }
+          ]
+        });
 
         const linearVictoryCheckResult = linearVictoryCheck(
           slotsInColumn,
@@ -73,7 +78,6 @@ class App extends React.Component {
         break;
       }
     }
-    console.log("last move", this.state.lastMove);
   };
 
   eventListenerFunctions = e => {
@@ -108,9 +112,12 @@ class App extends React.Component {
   };
 
   undoLastMove = () => {
-    this.toggleCurrentPlayer(() => {
-      this.state.lastMove.classList.remove("playerTwo");
-    });
+    const lastMove = this.state.lastMove.pop();
+    if (lastMove) {
+      this.setState({ currentPlayer: lastMove.player }, () => {
+        lastMove.slot.classList.remove(this.state.currentPlayer);
+      });
+    }
   };
 
   newGame = () => {
