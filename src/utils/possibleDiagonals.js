@@ -1,4 +1,4 @@
-const diags = [
+const possibleDiagonalWins = [
   [0, 7, 14, 21],
   [1, 8, 15, 22],
   [2, 9, 16, 23],
@@ -25,4 +25,4 @@ const diags = [
   [23, 28, 33, 38]
 ];
 
-export default diags;
+export default possibleDiagonalWins;

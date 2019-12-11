@@ -44,11 +44,16 @@ class App extends React.Component {
         !slotsInColumn[i].classList.contains("playerTwo")
       ) {
         slotsInColumn[i].classList.add(this.state.currentPlayer);
-        const linearCheck = linearVictoryCheck(
+        const linearVictoryCheckResult = linearVictoryCheck(
           slotsInColumn,
           i,
           this.state.currentPlayer
         );
+
+        const diagonalVictoryCheckResult = diagonalVictoryCheck(
+          this.state.currentPlayer
+        );
+
         break;
       }
     }
