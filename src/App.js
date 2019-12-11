@@ -5,6 +5,10 @@ import CurrentPlayer from "./components/current-player/currentPlayer.component";
 import Board from "./components/board/board.component";
 import ScoreBoard from "./components/scoreboard/scoreboard.component";
 import CustomButton from "./components/custom-button/customButton.component";
+import {
+  diagonalVictoryCheck,
+  linearVictoryCheck
+} from "./utils/victoryChecks";
 
 class App extends React.Component {
   constructor() {
@@ -23,7 +27,7 @@ class App extends React.Component {
     };
   }
 
-  switchPlayer = () => {
+  toggleCurrentPlayer = () => {
     if (this.state.currentPlayer === "playerOne") {
       this.setState({ currentPlayer: "playerTwo" });
     } else {
@@ -32,14 +36,19 @@ class App extends React.Component {
   };
 
   addClassToSlot = e => {
-    const slotsInCol = e.currentTarget.children;
+    const slotsInColumn = e.currentTarget.children;
     let i;
     for (i = 5; i >= 0; i -= 1) {
       if (
-        !slotsInCol[i].classList.contains("playerOne") &&
-        !slotsInCol[i].classList.contains("playerTwo")
+        !slotsInColumn[i].classList.contains("playerOne") &&
+        !slotsInColumn[i].classList.contains("playerTwo")
       ) {
-        slotsInCol[i].classList.add(this.state.currentPlayer);
+        slotsInColumn[i].classList.add(this.state.currentPlayer);
+        const linearCheck = linearVictoryCheck(
+          slotsInColumn,
+          i,
+          this.state.currentPlayer
+        );
         break;
       }
     }
@@ -49,7 +58,7 @@ class App extends React.Component {
     arrayOfColumns.forEach(column =>
       column.addEventListener("click", e => {
         this.addClassToSlot(e);
-        this.switchPlayer();
+        this.toggleCurrentPlayer();
       })
     );
   };
