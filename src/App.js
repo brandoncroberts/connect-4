@@ -24,7 +24,8 @@ class App extends React.Component {
       },
       currentPlayer: "playerOne",
       startingPlayer: "",
-      lastMove: []
+      lastMove: [],
+      gameInProgress: false
     };
   }
 
@@ -62,23 +63,28 @@ class App extends React.Component {
           this.state.currentPlayer
         );
 
-        const columns = document.querySelectorAll(".column");
-
         if (linearVictoryCheckResult) {
           alert(`${linearVictoryCheckResult.winner} wins`);
-          this.removeColumnEventListeners(columns);
           this.incrementWinnerScore(linearVictoryCheckResult.winner);
+          this.onVictory();
         }
 
         if (diagonalVictoryCheckResult) {
           alert(`${diagonalVictoryCheckResult.winner} wins`);
-          this.removeColumnEventListeners(columns);
           this.incrementWinnerScore(diagonalVictoryCheckResult.winner);
+          this.onVictory();
         }
 
         break;
       }
     }
+  };
+
+  onVictory = () => {
+    const columns = document.querySelectorAll(".column");
+    this.setState({ lastMove: [] });
+    this.setState({ gameInProgress: false });
+    this.removeColumnEventListeners(columns);
   };
 
   eventListenerFunctions = e => {
@@ -123,6 +129,7 @@ class App extends React.Component {
 
   disableUndoButtonCheck = () => {
     if (this.state.lastMove.length === 0) return "disabled";
+    if (this.state.gameInProgress === false) return "disabled";
   };
 
   toggleStartingPlayer = () => {
@@ -135,6 +142,7 @@ class App extends React.Component {
 
   newGame = () => {
     const columns = document.querySelectorAll(".column");
+    this.setState({ gameInProgress: true });
     this.removeClassesFromSlots();
     this.addColumnEventListeners(columns);
     this.toggleStartingPlayer();
