@@ -100,8 +100,14 @@ class App extends React.Component {
     });
   };
 
+  removeClassesFromSlots = () => {
+    const slots = document.querySelectorAll(".slots");
+    slots.forEach(slot => slot.classList.remove("playerOne", "playerTwo"));
+  };
+
   newGame = () => {
     const columns = document.querySelectorAll(".column");
+    this.removeClassesFromSlots();
     this.addColumnEventListeners(columns);
   };
 
