@@ -121,6 +121,10 @@ class App extends React.Component {
     }
   };
 
+  disableUndoButtonCheck = () => {
+    if (this.state.lastMove.length === 0) return "disabled";
+  };
+
   toggleStartingPlayer = () => {
     const nextStartingPlayer =
       this.state.startingPlayer === "playerOne" ? "playerTwo" : "playerOne";
@@ -146,7 +150,12 @@ class App extends React.Component {
         <Board />
         <button onClick={this.newGame}>New Game</button>
         <ScoreBoard players={this.state.players} scores={this.state.scores} />
-        <button onClick={this.undoLastMove}>Undo</button>
+        <button
+          onClick={this.undoLastMove}
+          disabled={this.disableUndoButtonCheck()}
+        >
+          Undo
+        </button>
       </div>
     );
   }
