@@ -4,7 +4,6 @@ import Header from "./components/header/header.component";
 import CurrentPlayer from "./components/current-player/currentPlayer.component";
 import Board from "./components/board/board.component";
 import ScoreBoard from "./components/scoreboard/scoreboard.component";
-import CustomButton from "./components/custom-button/customButton.component";
 import {
   diagonalVictoryCheck,
   linearVictoryCheck
@@ -23,15 +22,16 @@ class App extends React.Component {
         playerOne: 0,
         playerTwo: 0
       },
-      currentPlayer: "playerOne"
+      currentPlayer: "playerOne",
+      lastMove: ""
     };
   }
 
-  toggleCurrentPlayer = () => {
+  toggleCurrentPlayer = callbackFunction => {
     if (this.state.currentPlayer === "playerOne") {
-      this.setState({ currentPlayer: "playerTwo" });
+      this.setState({ currentPlayer: "playerTwo" }, callbackFunction);
     } else {
-      this.setState({ currentPlayer: "playerOne" });
+      this.setState({ currentPlayer: "playerOne" }, callbackFunction);
     }
   };
 
@@ -44,6 +44,7 @@ class App extends React.Component {
         !slotsInColumn[i].classList.contains("playerTwo")
       ) {
         slotsInColumn[i].classList.add(this.state.currentPlayer);
+        this.setState({ lastMove: slotsInColumn[i] });
 
         const linearVictoryCheckResult = linearVictoryCheck(
           slotsInColumn,
@@ -72,6 +73,7 @@ class App extends React.Component {
         break;
       }
     }
+    console.log("last move", this.state.lastMove);
   };
 
   eventListenerFunctions = e => {
@@ -105,6 +107,12 @@ class App extends React.Component {
     slots.forEach(slot => slot.classList.remove("playerOne", "playerTwo"));
   };
 
+  undoLastMove = () => {
+    this.toggleCurrentPlayer(() => {
+      this.state.lastMove.classList.remove("playerTwo");
+    });
+  };
+
   newGame = () => {
     const columns = document.querySelectorAll(".column");
     this.removeClassesFromSlots();
@@ -121,7 +129,7 @@ class App extends React.Component {
         <Board />
         <button onClick={this.newGame}>New Game</button>
         <ScoreBoard players={this.state.players} scores={this.state.scores} />
-        <CustomButton title={"undo"} />
+        <button onClick={this.undoLastMove}>Undo</button>
       </div>
     );
   }
