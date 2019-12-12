@@ -1,13 +1,22 @@
 import React from "react";
-import { ScoreboardWrapper, Title, ScoreValue } from "./scoreboard.styles";
+import {
+  ScoreboardWrapper,
+  Board,
+  Title,
+  ScoreValue,
+  Header
+} from "./scoreboard.styles";
 
 const Scoreboard = ({ players, scores }) => {
   return (
     <ScoreboardWrapper>
-      <Title>{players.playerOne}</Title>
-      <Title>{players.playerTwo}</Title>
-      <ScoreValue>{scores.playerOne}</ScoreValue>
-      <ScoreValue>{scores.playerTwo}</ScoreValue>
+      <Board>
+        <Header>Score</Header>
+        <Title>{players.playerOne}</Title>
+        <Title>{players.playerTwo}</Title>
+        <ScoreValue>{scores.playerOne}</ScoreValue>
+        <ScoreValue>{scores.playerTwo}</ScoreValue>
+      </Board>
     </ScoreboardWrapper>
   );
 };

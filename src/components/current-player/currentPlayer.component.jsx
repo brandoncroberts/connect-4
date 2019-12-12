@@ -1,12 +1,12 @@
 import React from "react";
-import { Title } from "./currentPlayer.styles";
+import { Wrapper, Title } from "./currentPlayer.styles";
 
 const CurrentPlayer = ({ currentPlayer }) => {
   return (
-    <div>
+    <Wrapper className="current-player">
       <Title>Current Player:</Title>
       <Title>{currentPlayer}</Title>
-    </div>
+    </Wrapper>
   );
 };
 

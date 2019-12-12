@@ -7,18 +7,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+}
+
 .slots {
-  border: 3px solid #d633ff;
-  height: 100px;
-  width: 100px;
+  background: blue;
+  border: 1px solid #d633ff;
+  height: 5vw;
+  width: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .hole {
-  height: 75px;
-  width: 75px;
+  height: 3.5vw;
+  width: 3.5vw;
   border-radius: 50%;
 }
 
