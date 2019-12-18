@@ -7,4 +7,5 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h2`
   margin: 2em 0.5em;
+  color: #181818;
 `;

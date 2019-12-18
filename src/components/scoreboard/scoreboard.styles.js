@@ -20,12 +20,14 @@ export const Header = styled.h1`
 `;
 
 export const Title = styled.h3`
+  color: #181818;
   display: flex;
   justify-content: center;
   align-self: center;
 `;
 
 export const ScoreValue = styled.h2`
+  color: #181818;
   display: flex;
   justify-content: center;
   align-self: center;
