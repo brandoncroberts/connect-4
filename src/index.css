@@ -40,3 +40,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.custom-button {
+  min-width: 250px;
+  margin: 20px auto;
+  border: none;
+  border-radius: 2px;
+  padding: 12px 0;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
+  background: #2196f3 center;
+  box-shadow: 0 0 4px #999;
+  outline: none;
+  transition: background 0.5s;
+}
+.custom-button:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%)
+    center/15000%;
+}
+.custom-button:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}

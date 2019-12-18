@@ -4,6 +4,7 @@ import Header from "./components/header/header.component";
 import CurrentPlayer from "./components/current-player/currentPlayer.component";
 import Board from "./components/board/board.component";
 import ScoreBoard from "./components/scoreboard/scoreboard.component";
+import CustomButton from "./components/custom-button/customButton.component";
 import {
   diagonalVictoryCheck,
   linearVictoryCheck
@@ -155,15 +156,23 @@ class App extends React.Component {
         <CurrentPlayer
           currentPlayer={this.state.players[this.state.currentPlayer]}
         />
-        <Board />
-        <button onClick={this.newGame}>New Game</button>
-        <ScoreBoard players={this.state.players} scores={this.state.scores} />
-        <button
-          onClick={this.undoLastMove}
-          disabled={this.disableUndoButtonCheck()}
-        >
-          Undo
-        </button>
+
+        <div className="main-grid">
+          <div className="buttons-container">
+            <button className="custom-button" onClick={this.newGame}>
+              New Game
+            </button>
+            <button
+              className="custom-button"
+              onClick={this.undoLastMove}
+              disabled={this.disableUndoButtonCheck()}
+            >
+              Undo
+            </button>
+          </div>
+          <Board />
+          <ScoreBoard players={this.state.players} scores={this.state.scores} />
+        </div>
       </div>
     );
   }
