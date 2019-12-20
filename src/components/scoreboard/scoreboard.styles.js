@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ScoreboardWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 20vh;
+  align-items: center;
 `;
 
 export const Board = styled.div`
