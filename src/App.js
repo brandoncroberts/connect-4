@@ -4,7 +4,6 @@ import Header from "./components/header/header.component";
 import CurrentPlayer from "./components/current-player/currentPlayer.component";
 import Board from "./components/board/board.component";
 import ScoreBoard from "./components/scoreboard/scoreboard.component";
-import CustomButton from "./components/custom-button/customButton.component";
 import {
   diagonalVictoryCheck,
   linearVictoryCheck

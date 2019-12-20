@@ -80,3 +80,19 @@ code {
   background-size: 100%;
   transition: background 0s;
 }
+
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slots {
+    height: 10vw;
+    width: 10vw;
+  }
+
+  .hole {
+    height: 7vw;
+    width: 7vw;
+  }
+}
